@@ -26,9 +26,15 @@
   },
   "dependencies": {
     "@esy-ocaml/reason": "*",
+    "@opam/batteries": "2.10.0",
+    "@opam/core": "v0.12.4",
     "@opam/dune": ">=1.6.0",
+    "@opam/rtop": "3.5.2",
+    "@opam/utop": "2.4.2",
     "@reason-native/rely": "^3.1.0",
-    "ocaml": "^4.4.0"
+    "ocaml": "^4.4.0",
+    "rtop": "^0.4.6",
+    "utop": "^1.4.1"
   },
   "devDependencies": {
     "ocaml": "4.7.1004",

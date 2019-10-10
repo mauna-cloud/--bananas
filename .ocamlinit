@@ -1,0 +1,18 @@
+let () =
+  try (Topdirs.dir_directory(Sys.getenv("OCAML_TOPLEVEL_PATH"))) {
+  | Not_found => ()
+  };
+
+let () =
+  try (Topdirs.dir_directory(".")) {
+  | Not_found => ()
+  };
+
+#thread;
+
+#require "batteries";
+#require "core";
+#require "core.syntax";
+
+open Batteries;
+open Core;
