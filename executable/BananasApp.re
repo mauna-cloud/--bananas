@@ -1,1 +1,3 @@
-Bananas.Util.foo();
+/* BananasApp.re */
+
+Console.log("hello");

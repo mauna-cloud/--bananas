@@ -14,9 +14,15 @@
       "main": "TestBananas",
       "name": "TestBananas.exe"
     },
-    "library": { "name": "bananas.lib", "namespace": "Bananas" },
+    "library": {
+      "imports": ["Console = require('@reason-native/console/lib')"],
+      "require": ["console.lib"],
+      "name": "bananas.lib",
+      "namespace": "Bananas"
+    },
     "executable": {
-      "require": ["bananas.lib"],
+      "imports": ["Console = require('@reason-native/console/lib')"],
+      "require": ["console.lib", "bananas.lib"],
       "main": "BananasApp",
       "name": "BananasApp.exe"
     }
@@ -32,6 +38,7 @@
     "@opam/dune": ">=1.6.0",
     "@opam/rtop": "3.5.2",
     "@opam/utop": "2.4.2",
+    "@reason-native/console": "^0.1.0",
     "@reason-native/rely": "^3.1.0",
     "ocaml": "^4.4.0",
     "rtop": "^0.4.6",

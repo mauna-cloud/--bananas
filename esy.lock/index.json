@@ -1,5 +1,5 @@
 {
-  "checksum": "7ca163833ead72e94e3fd48134f3ac66",
+  "checksum": "dc2a291ffc63d2e0875408e36ff03378",
   "root": "bananas@link-dev:./package.json",
   "node": {
     "utop@1.4.1@d41d8cd9": {
@@ -576,6 +576,7 @@
       "dependencies": [
         "utop@1.4.1@d41d8cd9", "rtop@0.4.6@d41d8cd9",
         "ocaml@4.7.1004@d41d8cd9", "@reason-native/rely@3.1.0@d41d8cd9",
+        "@reason-native/console@0.1.0@d41d8cd9",
         "@opam/utop@opam:2.4.2@1cef5c4e", "@opam/rtop@opam:3.5.2@7cdd768c",
         "@opam/dune@opam:1.11.4@21d66ccd",
         "@opam/core@opam:v0.12.4@4028204c",

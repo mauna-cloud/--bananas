@@ -7,4 +7,5 @@
    (name Bananas)
    ; Other libraries list this name in their package.json 'require' field to use this library.
    (public_name bananas.lib)
+   (libraries  console.lib )
 )
