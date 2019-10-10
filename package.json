@@ -5,17 +5,18 @@
   "esy": {
     "build": "dune build -p <PACKAGE_NAME>",
     "buildDev": "pesy",
-    "release": { "releasedBinaries": [ "BananasApp.exe" ] }
+    "release": { "releasedBinaries": ["BananasApp.exe"] }
   },
   "buildDirs": {
     "test": {
-      "require": [ "bananas.lib" ],
+      "imports": ["Rely = require('@reason-native/rely/lib')"],
+      "require": ["rely.lib", "bananas.lib"],
       "main": "TestBananas",
       "name": "TestBananas.exe"
     },
     "library": { "name": "bananas.lib", "namespace": "Bananas" },
     "executable": {
-      "require": [ "bananas.lib" ],
+      "require": ["bananas.lib"],
       "main": "BananasApp",
       "name": "BananasApp.exe"
     }
