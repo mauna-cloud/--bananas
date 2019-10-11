@@ -12,22 +12,23 @@ describe("List Functor", ({ test }) => {
     let f = x => x mod 2;
     let g = x => x - 1;
 
-    expect.bool(composeLaw(f, g, [])).toBe(true) |> ignore;
+    expect.bool(composeLaw(f, g, [])).toBe(true);
     expect.bool(composeLaw(f, g, [1, 2, 3])).toBe(true) |> ignore;
   });
 });
 
-/* describe("Option Functor", () => { */
-/*   module OptionFunctorLaws = FunctorLaws(OptionFunctor); */
-/*   open OptionFunctorLaws; */
+describe("Option Functor", ({ test }) => {
+  module OptionFunctorLaws = FunctorLaws(OptionFunctor);
+  open OptionFunctorLaws;
 
-/*   test("Functor Laws", () => */
-/*     expect(idLaw(None)) |> toBe(true)) |> ignore; */
-/*     expect(idLaw(Some(5))) |> toBe(true) |> ignore; */
+  test("Functor Laws", ({ expect }) => {
+    expect.bool(idLaw(None)).toBe(true);
+    expect.bool(idLaw(Some(5))).toBe(true) |> ignore;
 
-/*     let f = x => x mod 2; */
-/*     let g = x => x - 1; */
+    let f = x => x mod 2;
+    let g = x => x - 1;
 
-/*     expect(composeLaw(f, g, None)) |> toBe(true) |> ignore; */
-/*     expect(composeLaw(f, g, Some(5))) |> toBe(true) |> ignore; */
-/* }); */
+    expect.bool(composeLaw(f, g, None)).toBe(true);
+    expect.bool(composeLaw(f, g, Some(5))).toBe(true) |> ignore;
+  });
+});

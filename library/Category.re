@@ -1,7 +1,7 @@
 module type Category = {
   type t('a, 'b); 
 
-  let id: ('a) => t('a, 'a);
+  let id: t('a, 'a);
   let compose: t('b, 'c) => t('a, 'b) => t('a, 'c);
 };
 
@@ -20,8 +20,8 @@ module CategoryLaws = (C: Category) => {
   module CatU = CategoryUtils(C);
   open CatU;
 
-  let rightIdLaw = (f, x) => (f <<< id(x)) == f;
-  let leftIdLaw = (f, x) => (id(x) <<< f) == f;
+  let rightIdLaw = f => (f <<< id) == f;
+  let leftIdLaw = f => (id <<< f) == f;
   let composeLaw = (f, g, h) => ((f <<< g) <<< h) == (f <<< (g <<< h));
 };
 
@@ -32,8 +32,8 @@ module FuncC_: Category with type t('a, 'b) = func('a, 'b) = {
   type t('a, 'b) = func('a, 'b);
   open Util;
 
-  let id = x => Function(_ => x);
-  let compose = (Function(f), Function(g)) => Function(g >>> f);
+  let id = Function(x => x);
+  let compose = (Function(f), Function(g)) => Function(f <<< g);
 };
 
 module FunctionCategory = CategoryUtils(FuncC_);

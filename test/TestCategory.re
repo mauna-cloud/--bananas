@@ -1,15 +1,32 @@
 open TestFramework;
 open Bananas.Category;
 
-/* describe("Function Category", () => { */
-/*   module FunctionCategoryLaws = CategoryLaws(FunctionCategory); */
-/*   open FunctionCategoryLaws; */
-/*   open Expect; */
+describe("Function Category", ({ test }) => {
+  open FunctionCategory;
 
-/* test("Category Laws", () => */
-/*   let f = x => x mod 2; */
-/*   let g = x => x - 1; */
+  module FunctionSpecificLaws = {
+    module FunctionCategoryLaws = CategoryLaws(FunctionCategory);
+    include FunctionCategoryLaws;
 
-/* expect(idLaw([])) |> toBe(true)); */
-/* expect(idLaw([1, 2])) |> toBe(true) |> ignore; */
-/* }); */
+    let rightIdLaw = (f, x) => call(f <<< id, x) == call(f, x);
+    let leftIdLaw = (f, x) => call(id <<< f, x) == call(f, x);
+
+    let composeLaw = (f, g, h, x) =>
+      call((f <<< g) <<< h, 2) == call(f <<< (g <<< h), 2);
+  }
+
+  open FunctionSpecificLaws;
+
+  test("Category Laws", ({ expect }) => {
+    let f = x => x mod 2;
+    let g = x => x - 1;
+    let h = x => x + 9;
+
+    expect.bool(rightIdLaw(Function(f), 2)).toBe(true);
+    expect.bool(leftIdLaw(Function(f), 2)).toBe(true) |> ignore;
+
+    expect.bool(composeLaw(
+      Function(f), Function(g), Function(h), 6
+    )).toBe(true) |> ignore;
+  });
+});

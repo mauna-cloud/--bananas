@@ -10,7 +10,7 @@
   "buildDirs": {
     "test": {
       "imports": ["Rely = require('@reason-native/rely/lib')"],
-      "require": ["rely.lib", "bananas.lib"],
+      "require": ["bananas.lib", "console.lib", "rely.lib"],
       "main": "TestBananas",
       "name": "TestBananas.exe"
     },
