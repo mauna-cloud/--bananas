@@ -50,4 +50,4 @@ let assoc = ((p, c)) => (fst(p), (snd(p), c));
 
 /* func type */
 type func('a, 'b) = Function('a => 'b);
-let call = (Function(f), a) => f(a);
+let call = (Function(f), x) => f(x);

@@ -34,14 +34,17 @@ module ArrowLaws = (A: Arrow) => {
   module ArrU = ArrowUtils(A);
   open ArrU;
 
-  let idLaw = x => arr(Util.id) == id;
-  let arrDistLaw = (f, g) => arr(Util.(f >>> g)) == (arr(f) >>> arr(g));
+  let idLaw = (~lift, ()) => lift(arr(Util.id)) == lift(id);
+  let arrDistLaw = (f, g, ~lift, ()) =>
+    lift(arr(Util.(f >>> g))) == lift(arr(f) >>> arr(g));
 
-  let firstFstLaw = f => (first(f) >>> arr(fst)) == (arr(fst) >>> f);
-  let firstDistLaw = (fa, ga) => first(fa >>> ga) == (first(fa) >>> first(ga));
+  let firstFstLaw = (f, ~lift, ()) =>
+    lift(first(f) >>> arr(fst)) == lift(arr(fst) >>> f);
+  let firstDistLaw = (fa, ga, ~lift, ()) =>
+    lift(first(fa >>> ga)) == lift(first(fa) >>> first(ga));
 
-  let firstAssocLaw = (f: t('a, 'b)) =>
-    first(first(f)) >>> arr(assoc) == (arr(assoc) >>> first(f));
+  let firstAssocLaw = (f: t('a, 'b), ~lift, ()) =>
+    lift(first(first(f)) >>> arr(assoc)) == lift(arr(assoc) >>> first(f));
 };
 
 module FuncA_: Arrow with type t('a, 'b) = Util.func('a, 'b) = {
