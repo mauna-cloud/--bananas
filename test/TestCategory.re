@@ -1,4 +1,5 @@
 open TestFramework;
+open Bananas.Util;
 open Bananas.Category;
 
 describe("Function Category", ({ test }) => {

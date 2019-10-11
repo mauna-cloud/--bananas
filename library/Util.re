@@ -48,3 +48,6 @@ let swap = p => (snd(p), fst(p));
  */
 let assoc = ((p, c)) => (fst(p), (snd(p), c));
 
+/* func type */
+type func('a, 'b) = Function('a => 'b);
+let call = (Function(f), a) => f(a);

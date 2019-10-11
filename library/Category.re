@@ -1,3 +1,5 @@
+/* Category.re */
+
 module type Category = {
   type t('a, 'b); 
 
@@ -25,12 +27,9 @@ module CategoryLaws = (C: Category) => {
   let composeLaw = (f, g, h) => ((f <<< g) <<< h) == (f <<< (g <<< h));
 };
 
-type func('a, 'b) = Function('a => 'b);
-let call = (Function(f), a) => f(a);
-
-module FuncC_: Category with type t('a, 'b) = func('a, 'b) = {
-  type t('a, 'b) = func('a, 'b);
+module FuncC_: Category with type t('a, 'b) = Util.func('a, 'b) = {
   open Util;
+  type t('a, 'b) = func('a, 'b);
 
   let id = Function(x => x);
   let compose = (Function(f), Function(g)) => Function(f <<< g);
