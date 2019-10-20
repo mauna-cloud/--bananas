@@ -1,8 +1,9 @@
+/* Option.re */
+
 open Bananas.Typeclasses.Alternative;
 open Bananas.Typeclasses.Applicative;
 open Bananas.Typeclasses.Functor;
 open Bananas.Typeclasses.Monad;
-open Bananas.Typeclasses.Monoid;
 open Bananas.Typeclasses.Semigroup;
 open Bananas.Typeclasses.Traversable;
 
@@ -70,5 +71,20 @@ module OptionTraversable =
     switch (x) {
     | None => A.pure(None)
     | Some(x) => (a => Some(a)) <$> f(x)
+    };
+};
+
+// Generic type
+module type GenericTypeConstuctor = {type t;};
+
+/* Option as Semigroup */
+module OptionSemigroup =
+       (T: GenericTypeConstuctor)
+       : (Semigroup with type t = option(T.t)) => {
+  type t = option(T.t);
+  let append = (m, n) =>
+    switch (m) {
+    | None => n
+    | _ => m
     };
 };
