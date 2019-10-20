@@ -1,6 +1,6 @@
 open TestFramework;
-open Bananas.Util;
-open Bananas.Arrow;
+open Bananas.Typeclasses.Util;
+open Bananas.Typeclasses.Arrow;
 
 describe("Function Arrow", ({ test }) => {
   open FunctionArrow;

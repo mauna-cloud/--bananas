@@ -29,21 +29,3 @@ module MonadLaws = (M: Monad) => {
   let associativityLaw = (m, f, g) =>
     m >>= (x => f(x) >>= g) == (m >>= f >>= g);
 };
-
-module ListM_: Monad with type t('a) = list('a) = {
-  include Applicative.ListApplicative;
-  let bind = (m, f) =>
-    List.fold_right((x, y) => List.append(f(x), y), m, []);
-};
-
-module ListMonad = MonadUtils(ListM_);
-
-module OptionM_: Monad with type t('a) = option('a) = {
-  include Applicative.OptionApplicative;
-  let bind = (m, f) =>
-    switch (m) {
-    | None => None
-    | Some(x) => f(x)
-    };
-};
-module OptionMonad = MonadUtils(OptionM_);

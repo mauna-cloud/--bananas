@@ -47,7 +47,3 @@ let swap = p => (snd(p), fst(p));
   assoc :: (((a, b), c)) -> (a, (b, c))
  */
 let assoc = ((p, c)) => (fst(p), (snd(p), c));
-
-/* func type */
-type func('a, 'b) = Function('a => 'b);
-let call = (Function(f), x) => f(x);

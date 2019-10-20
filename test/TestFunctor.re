@@ -1,5 +1,5 @@
 open TestFramework;
-open Bananas.Functor;
+open Bananas.Typeclasses.Functor;
 
 describe("List Functor", ({ test }) => {
   module ListFunctorLaws = FunctorLaws(ListFunctor);

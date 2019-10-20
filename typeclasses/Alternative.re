@@ -33,23 +33,3 @@ module AlternativeUtils = (A: Alternative) => {
     AM.concat(ps);
   };
 };
-
- module ListA_: Alternative with type t('a) = list('a) = {
-  include Applicative.ListApplicative;
-  let empty = [];
-  let (<|>) = (@);
-};
-
-module ListAlternative = AlternativeUtils(ListA_);
-
-module OptionA_: Alternative with type t('a) = option('a) = {
-  include Applicative.OptionApplicative;
-  let empty = None;
-  let (<|>) = (x, k) =>
-    switch (x) {
-    | None => k
-    | x => x
-    };
-};
-
-module OptionAlternative = AlternativeUtils(OptionA_);

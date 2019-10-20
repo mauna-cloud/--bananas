@@ -19,20 +19,3 @@ module FunctorLaws = (F: Functor) => {
   let idLaw = x => fmap(id, x) == x;
   let composeLaw = (f, g, xs) => fmap(f <<< g, xs) == fmap(f, fmap(g, xs));
 };
-
-module ListF_: Functor with type t('a) = list('a) = {
-  type t('a) = list('a);
-  let fmap = f => List.map(f);
-};
-
-module ListFunctor = FunctorUtils(ListF_);
-
-module OptionF_: Functor with type t('a) = option('a) = {
-  type t('a) = option('a);
-  let fmap = f =>
-    fun
-    | Some(x) => Some(f(x))
-    | None => None;
-};
-
-module OptionFunctor = FunctorUtils(OptionF_);

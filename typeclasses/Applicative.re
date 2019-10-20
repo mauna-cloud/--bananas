@@ -29,23 +29,3 @@ module ApplicativeLaws = (A: Applicative) => {
   let compositionLaw = (u, v, w) =>
     pure((<<<)) <*> u <*> v <*> w == (u <*> (v <*> w));
 };
-
-module ListA_: Applicative with type t('a) = list('a) = {
-  include Functor.ListFunctor;
-  let pure = x => [x];
-  let ap = (fs, xs) => fmap(f => fmap(x => f(x), xs), fs) |> List.concat;
-};
-
-module ListApplicative = ApplicativeUtils(ListA_);
-
-module OptionA_: Applicative with type t('a) = option('a) = {
-  include Functor.OptionFunctor;
-  let pure = x => Some(x);
-  let ap = (f, x) =>
-    switch (f, x) {
-    | (Some(f), Some(x)) => Some(f(x))
-    | _ => None
-    };
-};
-
-module OptionApplicative = ApplicativeUtils(OptionA_);
