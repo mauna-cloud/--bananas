@@ -26,13 +26,3 @@ module CategoryLaws = (C: Category) => {
   let composeLaw = (f, g, h, ~lift, ()) =>
     lift((f <<< g) <<< h) == lift(f <<< (g <<< h));
 };
-
-module FuncC_: Category with type t('a, 'b) = Util.func('a, 'b) = {
-  open Util;
-  type t('a, 'b) = func('a, 'b);
-
-  let id = Function(Util.id);
-  let compose = (Function(f), Function(g)) => Function(f <<< g);
-};
-
-module FunctionCategory = CategoryUtils(FuncC_);

@@ -10,19 +10,25 @@
   "buildDirs": {
     "test": {
       "imports": ["Rely = require('@reason-native/rely/lib')"],
-      "require": ["bananas.lib", "console.lib", "rely.lib"],
+      "require": ["bananas.instances", "bananas.typeclasses", "console.lib", "rely.lib"],
       "main": "TestBananas",
       "name": "TestBananas.exe"
     },
-    "library": {
+    "typeclasses": {
       "imports": ["Console = require('@reason-native/console/lib')"],
       "require": ["console.lib"],
-      "name": "bananas.lib",
-      "namespace": "Bananas"
+      "name": "bananas.typeclasses",
+      "namespace": "Bananas.Typeclasses"
+    },
+    "instances": {
+      "imports": ["Console = require('@reason-native/console/lib')"],
+      "require": ["console.lib"],
+      "name": "bananas.instances",
+      "namespace": "Bananas.Instances"
     },
     "executable": {
       "imports": ["Console = require('@reason-native/console/lib')"],
-      "require": ["console.lib", "bananas.lib"],
+      "require": ["console.lib", "bananas.instances", "bananas.typeclasses"],
       "main": "BananasApp",
       "name": "BananasApp.exe"
     }

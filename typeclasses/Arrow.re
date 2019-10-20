@@ -46,16 +46,3 @@ module ArrowLaws = (A: Arrow) => {
   let firstAssocLaw = (f: t('a, 'b), ~lift, ()) =>
     lift(first(first(f)) >>> arr(assoc)) == lift(arr(assoc) >>> first(f));
 };
-
-module FuncA_: Arrow with type t('a, 'b) = Util.func('a, 'b) = {
-  open Util;
-  open Category;
-  type t('a, 'b) = func('a, 'b);
-
-  include (FuncC_:(module type of FuncC_) with type t('a, 'b) := t('a, 'b));
-
-  let arr = f => Function(f);
-  let first = (Function(f)) => Function(((x, y)) => (f(x), y));
-};
-
-module FunctionArrow = ArrowUtils(FuncA_);
