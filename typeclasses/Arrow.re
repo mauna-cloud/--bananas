@@ -1,5 +1,6 @@
 /* Arrow.re */
-/* http://hackage.haskell.org/package/base-4.12.0.0/docs/Control-Arrow.html */
+
+// http://hackage.haskell.org/package/base-4.12.0.0/docs/Control-Arrow.html
 
 module type Arrow = {
   open Category;

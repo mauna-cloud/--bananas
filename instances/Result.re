@@ -6,9 +6,14 @@ open Bananas.Typeclasses.Monad;
 open Bananas.Typeclasses.Semigroup;
 open Bananas.Typeclasses.Traversable;
 
+/* Result type */
+type result('a, 'b) =
+  | Ok('a)
+  | Error('b);
+
 /* Result as Functor */
-module ResultF_: Functor with type t('a) = result('a) = {
-  type t('a) = result('a);
+module ResultF_: Functor with type t('a) = result('a, exn) = {
+  type t('a) = result('a, exn);
   let fmap = f =>
     fun
     | Ok(x) => Ok(f(x))
@@ -18,7 +23,7 @@ module ResultF_: Functor with type t('a) = result('a) = {
 module ResultFunctor = FunctorUtils(ResultF_);
 
 /* Result as Applicative */
-module ResultA_: Applicative with type t('a) = result('a) = {
+module ResultA_: Applicative with type t('a) = result('a, exn) = {
   include ResultFunctor;
   let pure = x => Ok(x);
   let ap = (f, x) =>
@@ -31,7 +36,7 @@ module ResultA_: Applicative with type t('a) = result('a) = {
 module ResultApplicative = ApplicativeUtils(ResultA_);
 
 /* Result as Monad */
-module ResultM_: Monad with type t('a) = result('a) = {
+module ResultM_: Monad with type t('a) = result('a, exn) = {
   include ResultApplicative;
   let bind = (m, f) =>
     switch (m) {
@@ -47,9 +52,9 @@ module ResultTraversable =
        (A: Applicative)
        : (
            Traversable with
-             type t('a) = result('a) and type Applicative.t('a) = A.t('a)
+             type t('a) = result('a, exn) and type Applicative.t('a) = A.t('a)
          ) => {
-  type t('a) = result('a);
+  type t('a) = result('a, exn);
   module Applicative = A;
   module AppU = ApplicativeUtils(Applicative);
   open AppU;
@@ -66,7 +71,7 @@ module type GenericTypeConstuctor = {type t;};
 /* Result as Semigroup */
 module ResultSemigroup =
        (T: GenericTypeConstuctor)
-       : (Semigroup with type t = result(T.t)) => {
+       : (Semigroup with type t = result(T.t, exn)) => {
   type t = result(T.t);
   let append = (m, n) =>
     switch (m) {
