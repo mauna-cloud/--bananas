@@ -1,17 +1,17 @@
 /* List.re */
 
-open Bananas.Typeclasses.Alternative;
-open Bananas.Typeclasses.Applicative;
-open Bananas.Typeclasses.Functor;
-open Bananas.Typeclasses.Monad;
-open Bananas.Typeclasses.Monoid;
-open Bananas.Typeclasses.Semigroup;
-open Bananas.Typeclasses.Traversable;
+open Typeclasses.Alternative;
+open Typeclasses.Applicative;
+open Typeclasses.Functor;
+open Typeclasses.Monad;
+open Typeclasses.Monoid;
+open Typeclasses.Semigroup;
+open Typeclasses.Traversable;
 
 /* List as Functor */
 module ListF_: Functor with type t('a) = list('a) = {
   type t('a) = list('a);
-  let fmap = f => List.map(f);
+  let fmap = f => map(f);
 };
 
 module ListFunctor = FunctorUtils(ListF_);

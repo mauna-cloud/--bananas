@@ -4,7 +4,7 @@ module type ProFunctor = {
 };
 
 module ProFunctorUtils = (P: ProFunctor) => {
-  open Util;
+  open Library.Util;
   include P;
   let lmap = f => dimap(f, id);
   let rmap = f => dimap(id, f);

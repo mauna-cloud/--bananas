@@ -6,7 +6,7 @@ module type Monad = {
 };
 
 module MonadUtils = (M: Monad) => {
-  open Util;
+  open Library.Util;
   include M;
   module AppU = Applicative.ApplicativeUtils(M);
   include (AppU :(module type of AppU) with type t('a) := AppU.t('a));

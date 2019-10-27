@@ -13,7 +13,7 @@ module type Arrow = {
 };
 
 module ArrowUtils = (A: Arrow) => {
-  open Util;
+  open Library.Util;
   include A;
 
   module CatU = Category.CategoryUtils(A);
@@ -29,15 +29,15 @@ module ArrowUtils = (A: Arrow) => {
 };
 
 module ArrowLaws = (A: Arrow) => {
-  open Util;
+  open Library.Util;
   include A;
 
   module ArrU = ArrowUtils(A);
   open ArrU;
 
-  let idLaw = (~lift, ()) => lift(arr(Util.id)) == lift(id);
+  let idLaw = (~lift, ()) => lift(arr(Library.Util.id)) == lift(id);
   let arrDistLaw = (f, g, ~lift, ()) =>
-    lift(arr(Util.(f >>> g))) == lift(arr(f) >>> arr(g));
+    lift(arr(Library.Util.(f >>> g))) == lift(arr(f) >>> arr(g));
 
   let firstFstLaw = (f, ~lift, ()) =>
     lift(first(f) >>> arr(fst)) == lift(arr(fst) >>> f);

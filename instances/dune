@@ -4,8 +4,8 @@
 ; !!!! If you want to stop using pesy and manage this file by hand, change package.json's 'esy.build' command to: refmterr dune build -p  bananas
 (library
    ; The namespace that other packages/libraries will access this library through
-   (name Typeclasses)
+   (name Instances)
    ; Other libraries list this name in their package.json 'require' field to use this library.
-   (public_name bananas.typeclasses)
-   (libraries  console.lib bananas.lib )
+   (public_name bananas.instances)
+   (libraries  console.lib bananas.lib bananas.typeclasses )
 )

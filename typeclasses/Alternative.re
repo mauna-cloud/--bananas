@@ -1,3 +1,5 @@
+/* Alternative.re */
+
 module type Alternative = {
   type t('a);
   open Applicative;
@@ -5,6 +7,9 @@ module type Alternative = {
   let empty: t('a);
   let (<|>): (t('a), t('a)) => t('a);
 };
+
+// Generic type
+module type GenericTypeConstuctor = {type t;};
 
 module AlternativeUtils = (A: Alternative) => {
   include A;

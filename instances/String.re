@@ -1,7 +1,7 @@
 /* String.re */
 
-open Bananas.Typeclasses.Monoid;
-open Bananas.Typeclasses.Semigroup;
+open Typeclasses.Monoid;
+open Typeclasses.Semigroup;
 
 /* String as Semigroup */
 module StringSemigroup: Semigroup with type t = string = {
@@ -11,7 +11,7 @@ module StringSemigroup: Semigroup with type t = string = {
 
 /* String as Monoid */
 module StringM_: Monoid with type t = string = {
-  include Semigroup.StringSemigroup;
+  include StringSemigroup;
   let empty = "";
 };
 

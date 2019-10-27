@@ -7,5 +7,5 @@
    (name BananasApp)  ;  From package.json main field
    ; The name of the executable (runnable via esy x BananasApp.exe) 
    (public_name BananasApp.exe)  ;  From package.json name field
-   (libraries  console.lib bananas.lib ) ;  From package.json require field (array of strings)
+   (libraries  console.lib bananas.instances bananas.typeclasses ) ;  From package.json require field (array of strings)
 )

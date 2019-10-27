@@ -8,7 +8,7 @@ module type Category = {
 };
 
 module CategoryUtils = (C: Category) => {
-  open Util;
+  open Library.Util;
   include C;
   
   let (<<<) = compose;

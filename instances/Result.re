@@ -1,10 +1,10 @@
 /* Result.re */
 
-open Bananas.Typeclasses.Applicative;
-open Bananas.Typeclasses.Functor;
-open Bananas.Typeclasses.Monad;
-open Bananas.Typeclasses.Semigroup;
-open Bananas.Typeclasses.Traversable;
+open Typeclasses.Applicative;
+open Typeclasses.Functor;
+open Typeclasses.Monad;
+open Typeclasses.Semigroup;
+open Typeclasses.Traversable;
 
 /* Result type */
 type result('a, 'b) =
@@ -48,6 +48,7 @@ module ResultM_: Monad with type t('a) = result('a, exn) = {
 module ResultMonad = MonadUtils(ResultM_);
 
 /* Result as Traversable */
+/*
 module ResultTraversable =
        (A: Applicative)
        : (
@@ -64,6 +65,7 @@ module ResultTraversable =
     | Ok(x) => (a => Ok(a)) <$> f(x)
     };
 };
+*/
 
 // Generic type
 module type GenericTypeConstuctor = {type t;};
@@ -72,7 +74,7 @@ module type GenericTypeConstuctor = {type t;};
 module ResultSemigroup =
        (T: GenericTypeConstuctor)
        : (Semigroup with type t = result(T.t, exn)) => {
-  type t = result(T.t);
+  type t = result(T.t, exn);
   let append = (m, n) =>
     switch (m) {
     | Error(_) => n

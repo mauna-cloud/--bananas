@@ -1,11 +1,11 @@
 /* Option.re */
 
-open Bananas.Typeclasses.Alternative;
-open Bananas.Typeclasses.Applicative;
-open Bananas.Typeclasses.Functor;
-open Bananas.Typeclasses.Monad;
-open Bananas.Typeclasses.Semigroup;
-open Bananas.Typeclasses.Traversable;
+open Typeclasses.Alternative;
+open Typeclasses.Applicative;
+open Typeclasses.Functor;
+open Typeclasses.Monad;
+open Typeclasses.Semigroup;
+open Typeclasses.Traversable;
 
 /* Option as Functor */
 module OptionF_: Functor with type t('a) = option('a) = {
@@ -32,7 +32,7 @@ module OptionA_: Applicative with type t('a) = option('a) = {
 module OptionApplicative = ApplicativeUtils(OptionA_);
 
 /* Option as Alternative */
-module OptionA_: Alternative with type t('a) = option('a) = {
+module OptionAl_: Alternative with type t('a) = option('a) = {
   include OptionApplicative;
   let empty = None;
   let (<|>) = (x, k) =>
@@ -42,7 +42,7 @@ module OptionA_: Alternative with type t('a) = option('a) = {
     };
 };
 
-module OptionAlternative = AlternativeUtils(OptionA_);
+module OptionAlternative = AlternativeUtils(OptionAl_);
 
 /* Option as Monad */
 module OptionM_: Monad with type t('a) = option('a) = {

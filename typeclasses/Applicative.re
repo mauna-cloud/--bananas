@@ -7,7 +7,7 @@ module type Applicative = {
 };
 
 module ApplicativeUtils = (A: Applicative) => {
-  open Util;
+  open Library.Util;
   include A;
   module FunU = Functor.FunctorUtils(A);
   include (FunU:(module type of FunU) with type t('a) := FunU.t('a)); 
@@ -20,7 +20,7 @@ module ApplicativeUtils = (A: Applicative) => {
 };
 
 module ApplicativeLaws = (A: Applicative) => {
-  open Util;
+  open Library.Util;
   module AppU = ApplicativeUtils(A);
   open AppU;
   let idLaw = x => pure(id) <*> x == x;
