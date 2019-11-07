@@ -8,25 +8,23 @@
     "release": { "releasedBinaries": ["BananasApp.exe"] }
   },
   "buildDirs": {
-    "library": {
-      "imports": ["Console = require('@reason-native/console/lib')"],
-      "require": ["console.lib"],
-      "name": "bananas.lib",
-      "namespace": "Library"
-    },
-
     "typeclasses": {
       "imports": ["Console = require('@reason-native/console/lib')"],
       "require": ["console.lib", "bananas.lib"],
       "name": "bananas.typeclasses",
       "namespace": "Typeclasses"
     },
-
     "instances": {
       "imports": ["Console = require('@reason-native/console/lib')"],
       "require": ["console.lib", "bananas.lib", "bananas.typeclasses"],
       "name": "bananas.instances",
       "namespace": "Instances"
+    },
+    "library": {
+      "imports": ["Console = require('@reason-native/console/lib')"],
+      "require": ["bananas.instances", "bananas.typeclasses", "console.lib"],
+      "name": "bananas.lib",
+      "namespace": "Bananas"
     },
     "test": {
       "imports": ["Rely = require('@reason-native/rely/lib')"],
@@ -57,6 +55,7 @@
     "@opam/core": "v0.12.4",
     "@opam/dune": ">=1.6.0",
     "@opam/rtop": "3.5.2",
+    "@opam/tablecloth-native": "0.0.6",
     "@opam/utop": "2.4.2",
     "@reason-native/console": "^0.1.0",
     "@reason-native/rely": "^3.1.0",

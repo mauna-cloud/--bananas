@@ -10,9 +10,9 @@ let () =
 
 #thread;
 
-#require "batteries";
 #require "core";
 #require "core.syntax";
+#require "tablecloth";
 
-open Batteries;
 open Core;
+open Tablecloth;

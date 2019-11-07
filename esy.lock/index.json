@@ -1,5 +1,5 @@
 {
-  "checksum": "dc2a291ffc63d2e0875408e36ff03378",
+  "checksum": "6d6a1319b16afec5bdb7aac934c18b7d",
   "root": "bananas@link-dev:./package.json",
   "node": {
     "utop@1.4.1@d41d8cd9": {
@@ -577,8 +577,9 @@
         "utop@1.4.1@d41d8cd9", "rtop@0.4.6@d41d8cd9",
         "ocaml@4.7.1004@d41d8cd9", "@reason-native/rely@3.1.0@d41d8cd9",
         "@reason-native/console@0.1.0@d41d8cd9",
-        "@opam/utop@opam:2.4.2@1cef5c4e", "@opam/rtop@opam:3.5.2@7cdd768c",
-        "@opam/dune@opam:1.11.4@21d66ccd",
+        "@opam/utop@opam:2.4.2@1cef5c4e",
+        "@opam/tablecloth-native@opam:0.0.6@f882577b",
+        "@opam/rtop@opam:3.5.2@7cdd768c", "@opam/dune@opam:1.11.4@21d66ccd",
         "@opam/core@opam:v0.12.4@4028204c",
         "@opam/batteries@opam:2.10.0@2f662d57",
         "@esy-ocaml/reason@3.5.2@d41d8cd9"
@@ -981,6 +982,33 @@
         "@opam/jst-config@opam:v0.12.0@c6e5a871",
         "@opam/jane-street-headers@opam:v0.12.0@a4102dc4",
         "@opam/dune@opam:1.11.4@21d66ccd", "@opam/base@opam:v0.12.2@d687150c"
+      ]
+    },
+    "@opam/tablecloth-native@opam:0.0.6@f882577b": {
+      "id": "@opam/tablecloth-native@opam:0.0.6@f882577b",
+      "name": "@opam/tablecloth-native",
+      "version": "opam:0.0.6",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://opam.ocaml.org/cache/md5/0e/0ef7f429aaebc0188e05a7bcb4b095bd#md5:0ef7f429aaebc0188e05a7bcb4b095bd",
+          "archive:https://github.com/darklang/tablecloth/archive/0.0.6.tar.gz#md5:0ef7f429aaebc0188e05a7bcb4b095bd"
+        ],
+        "opam": {
+          "name": "tablecloth-native",
+          "version": "0.0.6",
+          "path": "esy.lock/opam/tablecloth-native.0.0.6"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/dune@opam:1.11.4@21d66ccd",
+        "@opam/base@opam:v0.12.2@d687150c",
+        "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@opam/dune@opam:1.11.4@21d66ccd",
+        "@opam/base@opam:v0.12.2@d687150c"
       ]
     },
     "@opam/stdio@opam:v0.12.0@04b3b004": {

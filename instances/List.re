@@ -7,11 +7,11 @@ open Typeclasses.Monad;
 open Typeclasses.Monoid;
 open Typeclasses.Semigroup;
 open Typeclasses.Traversable;
-
+/* **
 /* List as Functor */
 module ListF_: Functor with type t('a) = list('a) = {
   type t('a) = list('a);
-  let fmap = f => map(f);
+  let fmap = f => List.map(f);
 };
 
 module ListFunctor = FunctorUtils(ListF_);
@@ -93,3 +93,4 @@ module ListTraversable =
     | [x, ...xs] => ((y, ys) => [y, ...ys]) <$> f(x) <*> traverse(f, xs)
     };
 };
+** */
