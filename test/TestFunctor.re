@@ -4,7 +4,6 @@ open Instances.List;
 open Instances.Option;
 open Typeclasses.Functor;
 
-/**
 describe("List Functor", ({ test }) => {
   module ListFunctorLaws = FunctorLaws(ListFunctor);
   open ListFunctorLaws;
@@ -20,7 +19,6 @@ describe("List Functor", ({ test }) => {
     expect.bool(composeLaw(f, g, [1, 2, 3])).toBe(true) |> ignore;
   });
 });
- */
    
 describe("Option Functor", ({ test }) => {
   module OptionFunctorLaws = FunctorLaws(OptionFunctor);

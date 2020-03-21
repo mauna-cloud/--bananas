@@ -7,17 +7,19 @@ open Typeclasses.Monad;
 open Typeclasses.Monoid;
 open Typeclasses.Semigroup;
 open Typeclasses.Traversable;
-/* **
+
+open Base;
+
 /* List as Functor */
 module ListF_: Functor with type t('a) = list('a) = {
-  type t('a) = list('a);
-  let fmap = f => List.map(f);
+  type t('a) = list('a)
+  let fmap = (f, ls) => List.map(ls, f);
 };
 
 module ListFunctor = FunctorUtils(ListF_);
 
 /* List as Applicative */
-module ListA_: Applicative with type t('a) = list('a) = {
+module ListA_: Applicative with type t('a) = Core.List.t('a) = {
   include ListFunctor;
   let pure = x => [x];
   let ap = (fs, xs) => fmap(f => fmap(x => f(x), xs), fs) |> List.concat;
@@ -26,19 +28,20 @@ module ListA_: Applicative with type t('a) = list('a) = {
 module ListApplicative = ApplicativeUtils(ListA_);
 
 /* List as Alternative */
-module ListA_: Alternative with type t('a) = list('a) = {
+module ListAlt_: Alternative with type t('a) = list('a) = {
   include ListApplicative;
   let empty = [];
   let (<|>) = (@);
 };
 
-module ListAlternative = AlternativeUtils(ListA_);
+module ListAlternative = AlternativeUtils(ListAlt_);
 
 /* List as Monad */
+
 module ListM_: Monad with type t('a) = list('a) = {
   include ListApplicative;
-  let bind = (m, f) =>
-    List.fold_right((x, y) => List.append(f(x), y), m, []);
+  let bind = (m, f) => 
+    List.fold_right(m, ~f = (x, y) => List.append(f(x), y), ~init = []);
 };
 
 module ListMonad = MonadUtils(ListM_);
@@ -55,7 +58,7 @@ module ListSemigroup =
 };
 
 /* List as Monoid */
-module ListM_ = (T: GenericTypeConstuctor) : (Monoid with type t = list(T.t)) => {
+module ListMonoid_ = (T: GenericTypeConstuctor) : (Monoid with type t = list(T.t)) => {
   include
     ListSemigroup(
       {
@@ -68,7 +71,7 @@ module ListM_ = (T: GenericTypeConstuctor) : (Monoid with type t = list(T.t)) =>
 module ListMonoid = (T: GenericTypeConstuctor) =>
   MonoidUtils(
     (
-      ListM_(
+      ListMonoid_(
         {
           type t = T.t;
         },
@@ -93,4 +96,3 @@ module ListTraversable =
     | [x, ...xs] => ((y, ys) => [y, ...ys]) <$> f(x) <*> traverse(f, xs)
     };
 };
-** */

@@ -7,5 +7,5 @@
    (name Instances)
    ; Other libraries list this name in their package.json 'require' field to use this library.
    (public_name bananas.instances)
-   (libraries  console.lib bananas.lib bananas.typeclasses )
+   (libraries  console.lib core bananas.lib bananas.typeclasses )
 )
