@@ -22,9 +22,9 @@
     },
     "library": {
       "imports": ["Console = require('@reason-native/console/lib')"],
-      "require": ["bananas.instances", "bananas.typeclasses", "console.lib"],
+      "require": ["console.lib"],
       "name": "bananas.lib",
-      "namespace": "Bananas"
+      "namespace": "Library"
     },
     "test": {
       "imports": ["Rely = require('@reason-native/rely/lib')"],

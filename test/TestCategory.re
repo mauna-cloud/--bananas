@@ -1,6 +1,8 @@
 open TestFramework;
-open Bananas.Library.Util;
-open Bananas.Typeclasses.Category;
+
+open Instances.Function;
+open Library.Util;
+open Typeclasses.Category;
 
 describe("Function Category", ({ test }) => {
   open FunctionCategory;
