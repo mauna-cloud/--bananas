@@ -1,3 +1,3 @@
 /* Typeclasses.re */
 
-open Typeclasses
+open Typeclasses;

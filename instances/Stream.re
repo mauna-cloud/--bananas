@@ -1,38 +1,29 @@
-/* List.re */
+/* Stream.re */
 
-open Base;
+open Base
 
-open Typeclasses.Alternative;
 open Typeclasses.Applicative;
 open Typeclasses.Functor;
-open Typeclasses.Monad;
 open Typeclasses.Monoid;
 open Typeclasses.Semigroup;
 open Typeclasses.Traversable;
 
-/* List as Functor */
-module ListF_: Functor with type t('a) = list('a) = {
-  type t('a) = list('a);
-  let fmap = (f, ls) => List.map(ls, f);
+/* -------------------------------- */
+/**
 
-  let (===) = (a: t('a), b: t('a)) => {
-    let are_equal: t(bool) = List.mapi(
-      a,
-      ~f=(idx, elem_a: 'a) => switch (List.nth(b, idx)) {
-        | Some(elem_b) => elem_b === elem_a
-        | None => false
-      }
-    );
-
-    let result = List.fold(are_equal, ~init=true, ~f=(&&));
-    result;
-  };
+/* Stream as Functor */
+module StreamF_:
+    Functor with type t('a) = Stream.t('a)
+  = {
+    type t('a) = Stream.t('a);
+    let fmap = Utils.Stream.map;
+    let equals = Utils.Stream.equals;
 };
 
-module ListFunctor = FunctorUtils(ListF_);
+module StreamFunctor = FunctorUtils(StreamF_);
 
 /* List as Applicative */
-module ListA_: Applicative with type t('a) = List.t('a) = {
+module ListA_: Applicative with type t('a) = Core.List.t('a) = {
   include ListFunctor;
   let pure = x => [x];
   let ap = (fs, xs) => fmap(f => fmap(x => f(x), xs), fs) |> List.concat;
@@ -109,3 +100,5 @@ module ListTraversable =
     | [x, ...xs] => ((y, ys) => [y, ...ys]) <$> f(x) <*> traverse(f, xs)
     };
 };
+
+   **/

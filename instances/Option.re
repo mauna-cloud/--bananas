@@ -14,6 +14,8 @@ module OptionF_: Functor with type t('a) = option('a) = {
     fun
     | Some(x) => Some(f(x))
     | None => None;
+
+  let (===) = Base.(===);
 };
 
 module OptionFunctor = FunctorUtils(OptionF_);

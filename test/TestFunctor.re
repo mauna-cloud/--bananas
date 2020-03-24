@@ -2,6 +2,7 @@ open TestFramework;
 
 open Instances.List;
 open Instances.Option;
+open Instances.Stream;
 open Typeclasses.Functor;
 
 describe("List Functor", ({ test }) => {

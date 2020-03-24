@@ -9,20 +9,26 @@
   },
   "buildDirs": {
     "typeclasses": {
-      "imports": [
-        "Console = require('@reason-native/console/lib')",
-        "Core = require('@opam/core/lib')"
-      ],
-      "require": ["console.lib", "core", "bananas.lib"],
+      "imports": ["Console = require('@reason-native/console/lib')"],
+      "require": ["bananas.lib", "console.lib"],
       "name": "bananas.typeclasses",
       "namespace": "Typeclasses"
     },
+    "utils": {
+      "imports": ["Console = require('@reason-native/console/lib')"],
+      "require": ["bananas.lib", "base", "console.lib"],
+      "name": "bananas.utils",
+      "namespace": "Utils"
+    },
     "instances": {
-      "imports": [
-        "Console = require('@reason-native/console/lib')",
-        "Core = require('@opam/core/lib')"
+      "imports": ["Console = require('@reason-native/console/lib')"],
+      "require": [
+        "bananas.lib",
+        "bananas.typeclasses",
+        "bananas.utils",
+        "base",
+        "console.lib"
       ],
-      "require": ["console.lib", "core", "bananas.lib", "bananas.typeclasses"],
       "name": "bananas.instances",
       "namespace": "Instances"
     },
