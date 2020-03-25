@@ -1,5 +1,4 @@
 /* Stream.re */
-
 /**
 
 open Base;
@@ -30,4 +29,4 @@ let map:
   result;
 };
 
-**/
+**/;

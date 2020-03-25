@@ -1,6 +1,6 @@
 /* String.re */
-
 open Typeclasses.Monoid;
+
 open Typeclasses.Semigroup;
 
 /* String as Semigroup */

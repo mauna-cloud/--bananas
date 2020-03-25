@@ -1,11 +1,14 @@
 /* Stream.re */
-
-open Base
+open Base;
 
 open Typeclasses.Applicative;
+
 open Typeclasses.Functor;
+
 open Typeclasses.Monoid;
+
 open Typeclasses.Semigroup;
+
 open Typeclasses.Traversable;
 
 /* -------------------------------- */
@@ -44,13 +47,13 @@ module ListAlternative = AlternativeUtils(ListAlt_);
 
 module ListM_: Monad with type t('a) = list('a) = {
   include ListApplicative;
-  let bind = (m, f) => 
+  let bind = (m, f) =>
     List.fold_right(m, ~f = (x, y) => List.append(f(x), y), ~init = []);
 };
 
 module ListMonad = MonadUtils(ListM_);
 
-// Generic type
+/* Generic type */
 module type GenericTypeConstuctor = {type t;};
 
 /* List as Semigroup */
@@ -83,7 +86,7 @@ module ListMonoid = (T: GenericTypeConstuctor) =>
     ),
   );
 
-/* List as Traversable */  
+/* List as Traversable */
 module ListTraversable =
        (A: Applicative)
        : (
@@ -101,4 +104,4 @@ module ListTraversable =
     };
 };
 
-   **/
+   **/;

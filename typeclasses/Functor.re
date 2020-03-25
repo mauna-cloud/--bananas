@@ -1,5 +1,5 @@
 module type Functor = {
-  type t('a); 
+  type t('a);
   let fmap: ('a => 'b, t('a)) => t('b);
   let (===): (t('a), t('a)) => bool;
 };
@@ -17,7 +17,6 @@ module FunctorUtils = (F: Functor) => {
 module FunctorLaws = (F: Functor) => {
   open Library.Util;
   open F;
-
   let idLaw = x => fmap(id, x) == x;
   let composeLaw = (f, g, xs) => fmap(f <<< g, xs) == fmap(f, fmap(g, xs));
 };

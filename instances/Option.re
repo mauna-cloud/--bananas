@@ -1,10 +1,14 @@
 /* Option.re */
-
 open Typeclasses.Alternative;
+
 open Typeclasses.Applicative;
+
 open Typeclasses.Functor;
+
 open Typeclasses.Monad;
+
 open Typeclasses.Semigroup;
+
 open Typeclasses.Traversable;
 
 /* Option as Functor */
@@ -14,7 +18,6 @@ module OptionF_: Functor with type t('a) = option('a) = {
     fun
     | Some(x) => Some(f(x))
     | None => None;
-
   let (===) = Base.(===);
 };
 
@@ -76,7 +79,7 @@ module OptionTraversable =
     };
 };
 
-// Generic type
+/* Generic type */
 module type GenericTypeConstuctor = {type t;};
 
 /* Option as Semigroup */

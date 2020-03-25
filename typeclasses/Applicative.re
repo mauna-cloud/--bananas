@@ -10,8 +10,7 @@ module ApplicativeUtils = (A: Applicative) => {
   open Library.Util;
   include A;
   module FunU = Functor.FunctorUtils(A);
-  include (FunU:(module type of FunU) with type t('a) := FunU.t('a)); 
-
+  include (FunU: (module type of FunU) with type t('a) := FunU.t('a));
   let (<*>) = f => ap(f);
   let liftA = (f, x) => f <$> x;
   let liftA2 = (f, x, y) => f <$> x <*> y;

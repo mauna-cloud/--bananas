@@ -1,9 +1,12 @@
 /* Result.re */
-
 open Typeclasses.Applicative;
+
 open Typeclasses.Functor;
+
 open Typeclasses.Monad;
+
 open Typeclasses.Semigroup;
+
 open Typeclasses.Traversable;
 
 /* Result type */
@@ -15,7 +18,6 @@ type result('a, 'b) =
 module ResultF_: Functor with type t('a) = result('a, exn) = {
   type t('a) = result('a, exn);
   let (===) = Base.(===);
-
   let fmap = f =>
     fun
     | Ok(x) => Ok(f(x))
@@ -51,25 +53,24 @@ module ResultMonad = MonadUtils(ResultM_);
 
 /* Result as Traversable */
 /*
-module ResultTraversable =
-       (A: Applicative)
-       : (
-           Traversable with
-             type t('a) = result('a, exn) and type Applicative.t('a) = A.t('a)
-         ) => {
-  type t('a) = result('a, exn);
-  module Applicative = A;
-  module AppU = ApplicativeUtils(Applicative);
-  open AppU;
-  let traverse = (f, x) =>
-    switch (x) {
-    | Error(e) => A.pure(e)
-    | Ok(x) => (a => Ok(a)) <$> f(x)
-    };
-};
-*/
-
-// Generic type
+ module ResultTraversable =
+        (A: Applicative)
+        : (
+            Traversable with
+              type t('a) = result('a, exn) and type Applicative.t('a) = A.t('a)
+          ) => {
+   type t('a) = result('a, exn);
+   module Applicative = A;
+   module AppU = ApplicativeUtils(Applicative);
+   open AppU;
+   let traverse = (f, x) =>
+     switch (x) {
+     | Error(e) => A.pure(e)
+     | Ok(x) => (a => Ok(a)) <$> f(x)
+     };
+ };
+ */
+/* Generic type */
 module type GenericTypeConstuctor = {type t;};
 
 /* Result as Semigroup */

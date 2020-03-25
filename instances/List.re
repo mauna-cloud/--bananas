@@ -1,29 +1,32 @@
 /* List.re */
-
 open Base;
 
 open Typeclasses.Alternative;
+
 open Typeclasses.Applicative;
+
 open Typeclasses.Functor;
+
 open Typeclasses.Monad;
+
 open Typeclasses.Monoid;
+
 open Typeclasses.Semigroup;
+
 open Typeclasses.Traversable;
 
 /* List as Functor */
 module ListF_: Functor with type t('a) = list('a) = {
   type t('a) = list('a);
   let fmap = (f, ls) => List.map(ls, f);
-
   let (===) = (a: t('a), b: t('a)) => {
-    let are_equal: t(bool) = List.mapi(
-      a,
-      ~f=(idx, elem_a: 'a) => switch (List.nth(b, idx)) {
+    let are_equal: t(bool) =
+      List.mapi(a, ~f=(idx, elem_a: 'a) =>
+        switch (List.nth(b, idx)) {
         | Some(elem_b) => elem_b === elem_a
         | None => false
-      }
-    );
-
+        }
+      );
     let result = List.fold(are_equal, ~init=true, ~f=(&&));
     result;
   };
@@ -50,16 +53,15 @@ module ListAlt_: Alternative with type t('a) = list('a) = {
 module ListAlternative = AlternativeUtils(ListAlt_);
 
 /* List as Monad */
-
 module ListM_: Monad with type t('a) = list('a) = {
   include ListApplicative;
-  let bind = (m, f) => 
-    List.fold_right(m, ~f = (x, y) => List.append(f(x), y), ~init = []);
+  let bind = (m, f) =>
+    List.fold_right(m, ~f=(x, y) => List.append(f(x), y), ~init=[]);
 };
 
 module ListMonad = MonadUtils(ListM_);
 
-// Generic type
+/* Generic type */
 module type GenericTypeConstuctor = {type t;};
 
 /* List as Semigroup */
@@ -71,7 +73,9 @@ module ListSemigroup =
 };
 
 /* List as Monoid */
-module ListMonoid_ = (T: GenericTypeConstuctor) : (Monoid with type t = list(T.t)) => {
+module ListMonoid_ =
+       (T: GenericTypeConstuctor)
+       : (Monoid with type t = list(T.t)) => {
   include
     ListSemigroup(
       {
@@ -92,7 +96,7 @@ module ListMonoid = (T: GenericTypeConstuctor) =>
     ),
   );
 
-/* List as Traversable */  
+/* List as Traversable */
 module ListTraversable =
        (A: Applicative)
        : (

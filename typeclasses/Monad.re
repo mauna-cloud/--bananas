@@ -9,14 +9,13 @@ module MonadUtils = (M: Monad) => {
   open Library.Util;
   include M;
   module AppU = Applicative.ApplicativeUtils(M);
-  include (AppU :(module type of AppU) with type t('a) := AppU.t('a));
-  
+  include (AppU: (module type of AppU) with type t('a) := AppU.t('a));
   let return = pure;
   let (>>=) = bind;
   let (=<<) = (f, m) => flip(bind, f, m);
   let join = m => id =<< m;
   let (>>) = (m, k) => m >>= const(k);
-  let (<<) = (m,k) => flip((>>), m, k);
+  let (<<) = (m, k) => flip((>>), m, k);
   let (>=>) = (f, g, x) => f(x) >>= g;
   let (<=<) = (f, g, x) => f =<< g(x);
 };
