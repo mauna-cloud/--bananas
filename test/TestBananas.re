@@ -5,4 +5,6 @@ include TestCategory;
 
 include TestFunctor;
 
+include TestStreamProc;
+
 TestFramework.cli();
