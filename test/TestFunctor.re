@@ -1,5 +1,9 @@
 open TestFramework;
-open Bananas.Typeclasses.Functor;
+
+open Instances.List;
+open Instances.Option;
+open Instances.Stream;
+open Typeclasses.Functor;
 
 describe("List Functor", ({ test }) => {
   module ListFunctorLaws = FunctorLaws(ListFunctor);
@@ -16,7 +20,7 @@ describe("List Functor", ({ test }) => {
     expect.bool(composeLaw(f, g, [1, 2, 3])).toBe(true) |> ignore;
   });
 });
-
+   
 describe("Option Functor", ({ test }) => {
   module OptionFunctorLaws = FunctorLaws(OptionFunctor);
   open OptionFunctorLaws;

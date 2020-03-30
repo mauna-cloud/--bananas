@@ -14,6 +14,8 @@ type result('a, 'b) =
 /* Result as Functor */
 module ResultF_: Functor with type t('a) = result('a, exn) = {
   type t('a) = result('a, exn);
+  let (===) = Base.(===);
+
   let fmap = f =>
     fun
     | Ok(x) => Ok(f(x))
